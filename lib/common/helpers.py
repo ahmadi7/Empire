@@ -615,7 +615,8 @@ def get_listener_cookies():
     cur.close()
 
     for i in range(len(options)):
-        cookies.append(pickle.loads(options[i][0])['Cookie']['Value'])
+        if 'Cookie' in pickle.loads(options[i][0]):
+            cookies.append(pickle.loads(options[i][0])['Cookie']['Value'])
 
     return cookies   
 
