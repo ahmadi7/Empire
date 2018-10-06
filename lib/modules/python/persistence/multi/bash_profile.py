@@ -84,13 +84,14 @@ import subprocess
 
 def remove_persistence(filename):
     data = ""
-    for line in open(filename).readlines():
-        if 'echo "import sys,base64,warnings;warnings.filterwarnings' in line:
-            continue
-        data += line
+    if os.path.isfile(filename):
+        for line in open(filename).readlines():
+            if 'echo "import sys,base64,warnings;warnings.filterwarnings' in line:
+                continue
+            data += line
 
-    with open(filename, "w") as persistence:
-        persistence.write(data)
+        with open(filename, "w") as persistence:
+            persistence.write(data)
 
 Remove = "%s"
 home = os.path.expanduser("~")
